@@ -1,0 +1,27 @@
+{
+  "name": "lets-electron",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ReindeerLab/lets-electron.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ReindeerLab/lets-electron/issues"
+  },
+  "homepage": "https://github.com/ReindeerLab/lets-electron#readme",
+  "devDependencies": {
+    "babel": "^5.8.23",
+    "browserify": "^11.2.0",
+    "electron-connect": "^0.3.3",
+    "electron-prebuilt": "^0.33.6",
+    "gulp": "^3.9.0"
+  }
+}
