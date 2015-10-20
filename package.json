@@ -4,7 +4,7 @@
   "description": "A Sample source for Electron",
   "main": "./src/browser/main.js",
   "scripts": {
-    "start": "babel ./src/renderer/scripts/todo.es6 --out-file ./src/renderer/scripts/todo.js && gulp serve",
+    "start": "gulp serve",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,7 +21,8 @@
   },
   "homepage": "https://github.com/ReindeerLab/lets-electron#readme",
   "devDependencies": {
-    "babel": "^5.8.23",
+    "browserify": "^11.2.0",
+    "coffeeify": "^1.1.0",
     "del": "^2.0.2",
     "electron-connect": "^0.3.3",
     "electron-packager": "^5.1.0",
@@ -29,7 +30,14 @@
     "gulp": "^3.9.0",
     "gulp-notify": "^2.2.0",
     "gulp-plumber": "^1.0.1",
-    "gulp-sass": "^2.0.4"
+    "gulp-sass": "^2.0.4",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.4.2",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.4.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "jquery": "^2.1.4"
+  }
 }

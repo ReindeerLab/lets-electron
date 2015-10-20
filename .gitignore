@@ -1,4 +1,8 @@
 node_modules/
-npm-debug.log
+npm-debug.*
+access_logs.*
+
 src/renderer/styles/*.css
 src/renderer/scripts/*.js
+
+dist/

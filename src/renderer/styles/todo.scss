@@ -22,7 +22,7 @@ html {
     div.container {
       @include center-horizontal();
       width: 95%;
-      overflow: scroll;
+      overflow: auto;
       -webkit-overflow-scrolling: touch;
     }
   }
