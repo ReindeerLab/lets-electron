@@ -1,0 +1,23 @@
+input {
+  padding: 5px 10px;
+  border-top: none;
+  border-right: none;
+  border-bottom: 1px solid #CCC;
+  border-left: none;
+
+  &:focus {
+    outline: none;
+    border-bottom: 1px solid #70C1B3;
+  }
+}
+
+textarea {
+  padding: 5px 10px;
+  border-radius: 5px;
+  resize: none;
+
+  &:focus {
+    outline: none;
+    border: 1px solid #70C1B3;
+  }
+}

@@ -1,0 +1,53 @@
+@mixin full-screen {
+  width: 100%;
+  height: 100%;
+}
+
+@mixin center-horizontal {
+  margin: 0 auto 0 auto;
+}
+
+@mixin aligned-center {
+  text-align: center;
+}
+
+html {
+  @include full-screen();
+  overflow: hidden;
+  font-family: Avenir , "Open Sans" , "Helvetica Neue" , Helvetica , Arial , Verdana , Roboto , "游ゴシック" ,
+    "Yu Gothic" , "游ゴシック体" , "YuGothic" , "ヒラギノ角ゴ Pro W3" , "Hiragino Kaku Gothic Pro" , "Meiryo UI" ,
+    "メイリオ" , Meiryo , "ＭＳ Ｐゴシック" , "MS PGothic" , sans-serif;
+
+  body {
+    @include full-screen();
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+
+    div.container {
+      @include full-screen();
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+
+      div.task-register {
+        @include aligned-center();
+        width: 250px;
+        height: 100%;
+        float: left;
+        border-right: 1px solid #CCC;
+
+        form {
+          div.item-group {
+            margin: 20px 0;
+          }
+        }
+      }
+
+      div.task-box {
+      }
+    }
+  }
+}
+
+@import "button";
+@import "input";

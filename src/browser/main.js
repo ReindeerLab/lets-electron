@@ -1,17 +1,24 @@
-var app = require('app');
-var BrowserWindow = require('browser-window');
-var mainWindow = null;
-require('crash-reporter').start();
-app.on('window-all-closed', function() {
-  if (process.platform != 'darwin') {
-    app.quit();
-  }
-});
+var app = require('app')
+var BrowserWindow = require('browser-window')
+var client = require('electron-connect').client
+var mainWindow = null
 
+// ウィンドウが全て閉じられた
+app.on('window-all-closed', function() {
+  app.quit()
+})
+
+// Electronのreadyイベント
 app.on('ready', function() {
-  mainWindow = new BrowserWindow({width: 800, height: 600});
-  mainWindow.loadUrl('file://' + __dirname + '/../renderer/index.html');
-  mainWindow.on('closed', function() {
-    mainWindow = null;
-  });
+  // ウィンドウの設定
+  mainWindow = new BrowserWindow({
+    width: 1024,
+    height: 768
+  })
+  // 初回表示するファイルの指定
+  mainWindow.loadUrl('file://' + __dirname + '/../renderer/index.html')
+  // DevToolsを開く
+  mainWindow.openDevTools()
+  // Livereload
+  client.create(mainWindow)
 });

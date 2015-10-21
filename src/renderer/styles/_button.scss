@@ -1,0 +1,33 @@
+button.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #CCC;
+
+  &.color-blue {
+    background-color: #70C1B3;
+  }
+  &.color-yellow {
+    background-color: #FFE066;
+  }
+  &.color-red {
+    background-color: #F25F5C;
+  }
+  &.color-black {
+    background-color: #50514F;
+    color: #CCC;
+  }
+  &.color-deep-blue {
+    background-color: #247BA0;
+    color: #CCC;
+  }
+  &:hover {
+  }
+  &:active {
+  }
+  &:focus {
+    outline: none;
+  }
+}

@@ -11,10 +11,16 @@ var buffer = require('vinyl-buffer')
 var source = require('vinyl-source-stream')
 var watchify = require('watchify')
 
+// デフォルト
 gulp.task('default', [])
 
+// パッケージ用タスク
 gulp.task('build', ['sass', 'browserify'])
 
+// 開発用タスク
+gulp.task('serve', ['watch'])
+
+// browserify用エラーハンドラ
 var errorHandler = function() {
   notify.onError({
     title: 'Compile error (browserify)',
@@ -23,6 +29,7 @@ var errorHandler = function() {
   this.emit('end')
 }
 
+// browserifyオブジェクト取得
 var getBundler = function(watch) {
   var bundler = browserify({
     entries: './src/renderer/scripts/index.coffee',
@@ -34,7 +41,7 @@ var getBundler = function(watch) {
   return bundler
 }
 
-// build for distribution
+// パッケージング用ビルド
 gulp.task('browserify', function() {
   getBundler()
     .bundle()
@@ -47,7 +54,7 @@ gulp.task('browserify', function() {
     .pipe(gulp.dest('./dist/renderer/scripts'))
 })
 
-// build for development
+// 開発用ビルド
 gulp.task('watchify', function() {
   var bundler = getBundler(true)
   var bundle = function() {
@@ -61,20 +68,21 @@ gulp.task('watchify', function() {
   bundle()
 })
 
+// Sassコンパイル
 gulp.task('sass', function() {
   gulp.src('./src/renderer/styles/*.scss')
-    .pipe(plumber({errorHandler: notify.onError({title: 'Error(sass)', message: '<%= error.message %>'})}))
+    .pipe(plumber({errorHandler: notify.onError({title: 'Compile error (Sass)', message: '<%= error.message %>'})}))
     .pipe(sass({outputStyle: 'compressed', includePaths: []}))
     .pipe(gulp.dest('./src/renderer/styles'))
 })
 
+// ファイル監視
 gulp.task('watch', ['watchify', 'sass'], function() {
   // compile tasks
   gulp.watch('./src/renderer/styles/*.scss', ['sass'])
+  // start electron
+  electron.start()
   // electron watch tasks
   gulp.watch(['./src/browser/**/*.js'], electron.restart)
-  gulp.watch(['./src/renderer/index.html', './src/**/*.js', './src/**/*.css'], electron.reload)
-  electron.start()
+  gulp.watch(['./src/renderer/**/*.{html,css,js}'], electron.reload)
 })
-
-gulp.task('serve', ['watch'])
