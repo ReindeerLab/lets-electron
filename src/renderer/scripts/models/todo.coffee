@@ -19,7 +19,16 @@ class TodoModel extends LocalStorage
       return val if seq is val.seq
   # 登録
   create: (title, detail) ->
-    @data.push {seq: @sequence(), title, detail, finished: false, deleted: false}
+    @data.push
+      seq: @sequence()
+      title: title
+      detail: detail
+      finished: false
+      deleted: false
+      created_at: new Date().toISOString()
+      updated_at: null
+      finished_at: null
+      deleted_at: null
     @save()
   # 更新
   update: (todo) ->
