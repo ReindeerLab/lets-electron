@@ -1,10 +1,10 @@
 LocalStorage = require './local-storage'
 
 # タスクを管理
-class TodoModel extends LocalStorage
+class TaskModel extends LocalStorage
   @seq
   constructor: ->
-    super 'todo', [], true
+    super 'tasks', [], true
     @setSequence()
   # シーケンス初期値設定
   setSequence: ->
@@ -31,19 +31,21 @@ class TodoModel extends LocalStorage
       deleted_at: null
     @save()
   # 更新
-  update: (todo) ->
+  update: (task) ->
     @data = @data.map (val) ->
-      if todo.seq is val.seq then todo else val
+      if task.seq is val.seq then task else val
     @save()
   # 削除
   delete: (seq) ->
-    todo = @find seq
-    todo.deleted = true
-    @update todo
+    task = @find seq
+    task.deleted = true
+    task.deleted_at = new Date().toISOString()
+    @update task
   # 完了
   finish: (seq) ->
-    todo = @find seq
-    todo.finished = true
-    @update todo
+    task = @find seq
+    task.finished = true
+    task.finished_at = new Date().toISOString()
+    @update task
 
-module.exports = TodoModel
+module.exports = TaskModel

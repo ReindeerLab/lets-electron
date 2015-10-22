@@ -1,6 +1,6 @@
 global.$ = global.jQuery = require 'jquery'
 
-todo = require './views/todo'
+taskView = require './views/task'
 
 $ ->
-  todo.render()
+  taskView.render()
