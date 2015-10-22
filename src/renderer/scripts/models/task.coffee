@@ -9,7 +9,7 @@ class TaskModel extends LocalStorage
   # シーケンス初期値設定
   setSequence: ->
     return @seq = 1 if @data.length < 1
-    @seq = Math.max.apply null, @data.map (val) -> val.seq
+    @seq = Math.max.apply(null, @data.map (val) -> val.seq) + 1
   # シーケンスを発番
   sequence: ->
     @seq++
