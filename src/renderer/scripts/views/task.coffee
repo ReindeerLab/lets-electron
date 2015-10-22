@@ -3,6 +3,7 @@ dialog = remote.require 'dialog'
 
 TaskModel = require '../models/task'
 DomUtils = require '../utils/dom-utils'
+StringUtils = require '../utils/string-utils'
 
 module.exports = do ->
   # constants
@@ -10,14 +11,16 @@ module.exports = do ->
 
   # props
   model = new TaskModel()
-  registForm = DomUtils.prop REGISTER_SELECTOR
   title = DomUtils.prop "#{REGISTER_SELECTOR} [name=title]"
   detail = DomUtils.prop "#{REGISTER_SELECTOR} [name=detail]"
   taskBox = DomUtils.prop '.task-box'
+  task = DomUtils.prop '.task'
 
   # functions
   # タスク登録
-  registTask = (title, detail) ->
+  createTask = (title, detail) ->
+    if StringUtils.isEmpty title || StringUtils.isEmpty detail
+      return dialog.showErrorBox '入力エラー', '全ての項目を埋めてください'
     model.create title, detail
     clearForm()
     drawTasks()
@@ -38,12 +41,19 @@ module.exports = do ->
       </div>
       """
     taskBox().html tasks.join ''
+    task().off().on 'click', ->
+      console.log DomUtils.prop(@)().attr 'data-seq' #FIXME
+
+  # タスク詳細を描画
+  drawDetail = (seq) ->
+    task model.find seq
 
   # 初回描画
   render: ->
     # dom events
+    registForm = DomUtils.prop REGISTER_SELECTOR
     registForm().on 'submit', ->
-      registTask title().val(), detail().val()
+      createTask title().val(), detail().val()
       false
 
     # draw phase
