@@ -41,18 +41,18 @@ module.exports = do ->
       </div>
       """
     taskBox().html tasks.join ''
+    # 詳細表示イベント
     task().off().on 'click', ->
-      console.log DomUtils.prop(@)().attr 'data-seq' #FIXME
+      drawDetail DomUtils.prop(@)().attr 'data-seq'
 
   # タスク詳細を描画
   drawDetail = (seq) ->
-    task model.find seq
+    task = model.find seq
 
   # 初回描画
   render: ->
     # dom events
-    registForm = DomUtils.prop REGISTER_SELECTOR
-    registForm().on 'submit', ->
+    DomUtils.prop(REGISTER_SELECTOR)().on 'submit', ->
       createTask title().val(), detail().val()
       false
 
